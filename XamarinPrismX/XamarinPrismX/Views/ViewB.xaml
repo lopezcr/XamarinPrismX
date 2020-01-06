@@ -9,10 +9,9 @@
         <ScrollView>
             <StackLayout>
                 <Label Text="Aqui va un texto"/>
-            </StackLayout>
+                <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+            </StackLayout>            
         </ScrollView>
     </ContentPage.Content>
-
-
 </ContentPage>
 

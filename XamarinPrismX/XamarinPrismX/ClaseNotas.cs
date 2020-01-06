@@ -104,6 +104,54 @@ protected override async void OnInitialized()
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
+003.-NAVEGACION
+
+//EN EL VIEWMODEL
+
+using ComedorIndustrial.Prism.Helper;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Navigation;
+using Prism.Services.Dialogs;
+
+ 
+//Este variable es para todos los botones
+private readonly INavigationService _navigationService;
+
+//y este es uno por uno por cada boton
+private DelegateCommand _navigateCommand;
+
+//EN ESPECIFICO CUANDO LE DE CLICK EN EL BOTON EJECUTO, igual por cada boton
+public DelegateCommand NavigateCommand => _navigateCommand ?? (_navigateCommand = new DelegateCommand(ExecuteNavigateCommand));
+
+
+public Vista1xViewModel(INavigationService navigationService ):base(navigationService)
+{
+   ...
+	_navigationService = navigationService; //hay que agregar este
+}
+
+
+//EL METODO QUE SE EJECUTA LLAMA CON EL CLICK
+async void ExecuteNavigateCommand()
+{
+            await _navigationService.NavigateAsync("MainPage");
+			
+			//Puede seri asi tambien
+            //Nota importante este es un ejemplo simple, en el comentario de abajo hay otro ejemploe
+			// await _navigationService.NavigateAsync("MainPage"); //creo que es para cuando en app.xaml esta asi var result = await NavigationService.NavigateAsync("NavigationPage/Vista1x");
+}
+-----
+
+EN LA VISTA AGREGAMOS EL BOTON
+
+<Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+
+
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
  
      
 */
