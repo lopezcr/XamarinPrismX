@@ -267,6 +267,20 @@ Este desmadre es para indicar si una vista esta dentro de otra :)
 #endregion
 
 
+#region Parametros Preparacion 
+/*     
+ En este commit voy a prepara el siguiente ejemplo de parametros, osea lo voy a hacer en dos commits
+ al crear un content crea varios archivos y es mas dificil revisar despues, asi que aqui creo el content y hago un ejemplo de navegacion
+
+    para entender este si no me acuerdo, ver el commit , "nueva vista y buton" y "navegacion boton 1"
+
+    Voy a crear una vista principal y vistaC , vista principal la dejare como vista inicial
+    Crear un boton de principal a vistaC
+
+
+
+ */
+#endregion
 
 
 #region Plantilla-region-MiTitulo-comentario

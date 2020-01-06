@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamarinPrismX.Views.Principal">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Esta es mi vista principal"></Label>
+            <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+        </StackLayout>
+    </ScrollView>
+  
+</ContentPage>
