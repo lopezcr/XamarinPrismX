@@ -152,9 +152,53 @@ EN LA VISTA AGREGAMOS EL BOTON
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
- 
-     
 */
+
+
+#region Otro boton a la vista navegacion
+/*
+     Es casi lo mismo que el otro pero solo para dejar claro el tema
+     //en este ejemplo con tal no he creado otro content (vista y su modelo), por lo que los dos botones llaman a main
+     //pero se entiende que solo se modificaria _navigationService hacia otra vista.
+
+        public class Vista1xViewModel : ViewModelBase
+    {
+ 
+
+        private DelegateCommand _navigateCommand;      
+        private DelegateCommand _navigateCommand2;
+
+        private readonly INavigationService _navigationService;
+
+
+        public DelegateCommand NavigateCommand => _navigateCommand ?? (_navigateCommand = new DelegateCommand(ExecuteNavigateCommand));
+        public DelegateCommand NavigateCommand2 => _navigateCommand2 ?? (_navigateCommand2 = new DelegateCommand(ExecuteNavigateCommand2));
+
+
+
+        public Vista1xViewModel(INavigationService navigationService ):base(navigationService)
+        {
+            Title = "Mi vista 1";
+            Titulo = "Titulo en español";
+            _navigationService = navigationService;
+        }
+
+        async void ExecuteNavigateCommand()
+        {
+           //En
+            await _navigationService.NavigateAsync("Vista2x"); 
+        }
+        async void ExecuteNavigateCommand2()
+        {
+            await _navigationService.NavigateAsync("MainPage");
+        }
+    }
+
+    /////en la vista el otro boton
+    <Button Text="Vista 2" Command="{Binding NavigateCommand2}"/>
+
+*/
+#endregion
 
 
 

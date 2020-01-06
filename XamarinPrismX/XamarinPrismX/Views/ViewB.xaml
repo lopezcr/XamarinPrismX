@@ -10,6 +10,7 @@
             <StackLayout>
                 <Label Text="Aqui va un texto"/>
                 <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+                <Button Text="Vista 2 tambien va a main" Command="{Binding NavigateCommand2}"/>
             </StackLayout>            
         </ScrollView>
     </ContentPage.Content>
