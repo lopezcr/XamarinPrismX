@@ -245,6 +245,29 @@ Este desmadre es para indicar si una vista esta dentro de otra :)
  */
 #endregion
 
+#region Navegacion prism
+/*     
+  //Supongo que con este no se puede validar, va directo a la vista sin pasar por  un metodo.
+ <Button Text="View B" Command="{prism:NavigateTo Vista1x}" />
+ 
+ 
+ 
+ //Creo que este va al tab y sale de su pagina contenedora. En el de arriba sigue en su pagina contenedora.
+ <Button Text="Select Tab C" Command="{prism:SelectTab ViewC}" />
+ 
+ 
+ //Se entiende.
+ <Button Text="Go Back" Command="{prism:GoBack}" />
+ 
+ //**************************************************
+ //El content page debe tener:
+  xmlns:prism="http://prismlibrary.com"   
+
+ */
+#endregion
+
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
