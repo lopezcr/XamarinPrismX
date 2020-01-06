@@ -322,6 +322,30 @@ ViewModelBase ya implementa INavigationAware, por eso yo solamente hice override
  */
 #endregion
 
+#region Verificacion de parametros
+/*     
+ //PARA VERIFICAR SI EXISTEN UN PARAMETRO
+if(parameters.ContainsKey("title"))
+            {
+
+            }
+			
+
+//otra verificacion			
+
+var result = parameters["title"] as string;
+            if(result==null)
+            {
+
+            }
+			
+			
+//a este le falta algo
+parameters.TryGetValue<string>("title");			
+
+ */
+#endregion
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
