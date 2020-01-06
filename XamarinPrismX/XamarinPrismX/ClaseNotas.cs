@@ -209,6 +209,42 @@ EN LA VISTA AGREGAMOS EL BOTON
  */
 #endregion
 
+#region Navegacion relativa y absoluta
+/*     
+      
+ //no hice ejemplo de este por que con lo demas se entiendo facil este pedo     
+  EN EL APP.XAML
+
+PUEDE ESTAR ASI
+var result = await NavigationService.NavigateAsync("NavigationPage/Vista1x");
+
+O  ASI
+
+var result = await NavigationService.NavigateAsync("Vista1x");
+
+
+--------------------------------------------------------------------------------
+
+EN EL MODEL PARA REDIRECCIONAR
+
+
+PUEDE ESTAR ASI
+
+await _navigationService.NavigateAsync("/MainPage");
+
+O  ASI
+
+await _navigationService.NavigateAsync("MainPage");
+
+o asi
+
+//con este mantenemos la vista contenedora y hacemos reset en el boton atras que aparece en el titulo
+await _navigationService.NavigateAsync("/NavigationPage/MainPage"); 
+
+Este desmadre es para indicar si una vista esta dentro de otra :)   
+ */
+#endregion
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
