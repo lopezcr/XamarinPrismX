@@ -19,7 +19,9 @@ namespace XamarinPrismX.ViewModels
 
         async void ExecuteNavigateCommand()
         {
-            await _navigationService.NavigateAsync("VistaC");         
+            var p = new NavigationParameters();
+            p.Add("title", "Sere un titulo que va por parametro");
+            await _navigationService.NavigateAsync("VistaC", p);         
         }
 
 

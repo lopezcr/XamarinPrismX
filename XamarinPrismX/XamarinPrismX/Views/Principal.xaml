@@ -7,7 +7,7 @@
     <ScrollView>
         <StackLayout>
             <Label Text="Esta es mi vista principal"></Label>
-            <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+            <Button Text="Navigate to ViewC" Command="{Binding NavigateCommand}"/>
         </StackLayout>
     </ScrollView>
   

@@ -4,5 +4,12 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamarinPrismX.Views.VistaC">
+
+    <ScrollView>
+        <StackLayout>
+            <Label Text="{Binding Title}"></Label>
+            <Label Text="Estoy en la visa c"></Label>
+        </StackLayout>
+    </ScrollView>
   
 </ContentPage>

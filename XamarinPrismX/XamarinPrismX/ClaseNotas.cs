@@ -282,6 +282,46 @@ Este desmadre es para indicar si una vista esta dentro de otra :)
  */
 #endregion
 
+#region Parametros
+/*     
+ //en el metodo de la funcion donde redireccionamos , ver archivo 003.-NAVEGACION.txt
+
+async void ExecuteNavigateCommand2()
+        {
+            var p = new NavigationParameters();
+            p.Add("title", "Este es un titulo por parametro");
+            await _navigationService.NavigateAsync("Vista2x",p);
+        }
+
+
+
+----------------------------------------------------------------------------
+//importante agregar la interface INavigationAware a la clase del viewmodel que recibe
+//En el modelo de la vista agregue el siguiente metodo override
+
+public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Title = parameters.GetValue<string>("title");
+        }
+
+//----------------------------------------------------------
+
+en la vista 
+<Label Text="{Binding Title}"/>
+
+
+
+//----------------------------------------------------------
+Algo de explicacion en el video, el vato agrego a la clase (en el modelo que recibe)la interface INavigationAware
+al agregar esta interface se agregan diferentes metodos que implementa la interface,
+osea el OnNavigatedTo y otros mas. Yo no implemente esta interface por que anteriormente
+yo habia cambiado de cual clase hereda mi clase de la vista de modelo Vista2xViewModel, 
+originalmente tenia BindableBase y yo la cambie a ViewModelBase
+ViewModelBase ya implementa INavigationAware, por eso yo solamente hice override al metodo OnNavigatedTo
+    
+ */
+#endregion
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
