@@ -200,5 +200,18 @@ EN LA VISTA AGREGAMOS EL BOTON
 */
 #endregion
 
+#region Boton Regresar
+/*     
+ 
+    //para este ejemplo puse el boton regresar en main
+    await _navigationService.GoBackAsync();
 
+ */
+#endregion
+
+
+#region Plantilla-region-MiTitulo-comentario
+/*     
+ */
+#endregion
 
