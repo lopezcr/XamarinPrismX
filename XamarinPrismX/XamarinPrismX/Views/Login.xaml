@@ -4,10 +4,14 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamarinPrismX.Views.Login">
-    <ScrollView>
-        <StackLayout>
-            <Label Text="Este es la pagina login"></Label>
-        </StackLayout>
-    </ScrollView>
-  
+    
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Image  AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" Source="Lemillion.jpg" AnchorX="800" AnchorY="1000"></Image>
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Orientation="Vertical">
+                <Label Text="un texto :)"></Label>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+
 </ContentPage>

@@ -361,6 +361,27 @@ parameters.TryGetValue<string>("title");
  */
 #endregion
 
+#region Imagen de fondo en pantalla
+/*     
+  Este no tiene tanto rollo la magia lo hace el AbsoluteLayout
+  Lo que sigue dentro del  content page
+  La imagen no tiene mas direccion que su propio nombre
+
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Image  AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" Source="miImage.png" AnchorX="800" AnchorY="1000"></Image>
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Orientation="Vertical">
+             ...
+            </StackLayout>
+        </ScrollView>
+
+    </AbsoluteLayout>
+
+
+ */
+#endregion
+
+
 #region Plantilla-region-MiTitulo-comentario
 /*     
  */
