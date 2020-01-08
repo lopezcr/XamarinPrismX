@@ -346,6 +346,16 @@ parameters.TryGetValue<string>("title");
  */
 #endregion
 
+#region Imagen de fondo xamarin prepraracion
+/*     
+ //En este commit voy a crear otro content y guardare una imagen en xamarinPrismX.android/Resources/drawable  //si no existe la carpeta la creamos.
+ //El nuevo Content lo llamare login :) y lo pondre como pagina principal
+ //la imagen que guarde se llama Lemillion.jpg     :)
+
+ */
+#endregion
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     

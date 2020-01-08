@@ -23,7 +23,7 @@ namespace XamarinPrismX
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/Principal");
+            await NavigationService.NavigateAsync("NavigationPage/Login");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,6 +33,7 @@ namespace XamarinPrismX
             containerRegistry.RegisterForNavigation<ViewB, ViewBViewModel>();
             containerRegistry.RegisterForNavigation<Principal, PrincipalViewModel>();
             containerRegistry.RegisterForNavigation<VistaC, VistaCViewModel>();
+            containerRegistry.RegisterForNavigation<Login, LoginViewModel>();
         }
     }
 }
