@@ -355,7 +355,11 @@ parameters.TryGetValue<string>("title");
  */
 #endregion
 
-
+#region Imagen de fondo xamarin Preparacion importante! correccion 
+/*     
+  Me equivoque al agregar la imagen, la imagen la guarde en el proyecto de ios
+ */
+#endregion
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
