@@ -382,6 +382,28 @@ parameters.TryGetValue<string>("title");
 #endregion
 
 
+#region Formulario login simple
+/*     
+   Agregare un pequeño formulario con usuario y contraseña con un frame nomas para que no se vea tan feo :P   
+
+         <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Orientation="Vertical"  VerticalOptions="Center">
+                <Frame Padding="10" >
+                    <StackLayout>
+                        <Label Text="Usuario"></Label>
+                        <Editor Text="I am an Editor" />
+
+                        <Label Text="Contraseña"></Label>
+                        <Editor Text="" Placeholder="Introduce una contraseña" />
+                    </StackLayout>                    
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+ */
+#endregion
+
+
 #region Plantilla-region-MiTitulo-comentario
 /*     
  */
