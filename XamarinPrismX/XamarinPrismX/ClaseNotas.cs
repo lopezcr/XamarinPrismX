@@ -525,7 +525,76 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Validacion formulario, login validacion (is null) y binding
+/*     
+   Para empezar se convirtio el viewmodel del login dle tipo viewmodel, ver punto 003 que es navegacion 
+   Se creo un boton para navegar y para este boton se creo un estilo nuevo.
 
+    Tambien se crearon campos privados y propiedades publicas, esto es necesario para hacer el binding
+    El xaml ya tenia el binding con las propiedades, pero no existian, asi que aqui solo se creo las propiedades
+    y se valido a la hora de navegar
+
+    No hize la validacion si existe el usuario, esto se vera en WebServices.
+    
+    -----------------------------------------------------------------------------------------------------------
+    public class LoginViewModel : ViewModelBase
+    {
+        private readonly INavigationService _navigationService;
+        private string _errorTextEmail;
+        private bool _hasErrorEmail;
+        private string _email;
+        private DelegateCommand _MainCommand;
+
+        public string Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
+
+        public string ErrorTextEmail
+        {
+            get => _errorTextEmail;
+            set => SetProperty(ref _errorTextEmail, value);
+        }
+
+        public bool HasErrorEmail
+        {
+            get => _hasErrorEmail;
+            set => SetProperty(ref _hasErrorEmail, value);
+        }
+
+
+
+        public DelegateCommand LoginCommand => _MainCommand ?? (_MainCommand = new DelegateCommand(ExecuteLoginCommand));
+        public LoginViewModel(INavigationService navigationService) : base(navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        async void ExecuteLoginCommand()
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                ErrorTextEmail = "Es requerido";
+                HasErrorEmail = true;
+                return;
+            }
+            else
+            {
+                HasErrorEmail = false;
+            }
+
+            var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+        }
+
+    }
+}
+
+
+
+
+ */
+#endregion
 
 
 

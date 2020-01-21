@@ -38,8 +38,8 @@
                                 </inputLayout:LabelStyle>
                             </inputLayout:SfTextInputLayout.HintLabelStyle>
                             <Entry Keyboard="Email" x:Name="TxtEmail" Text="{Binding Email}" BackgroundColor="#f6f6f6" Style="{StaticResource EntryNormal}" />
-                        </inputLayout:SfTextInputLayout>
-
+                        </inputLayout:SfTextInputLayout> 
+                        <Button Text="INICIAR SESIÓN" HorizontalOptions="FillAndExpand" Opacity="1" FontSize="12" Margin="0" IsEnabled="{Binding IsEnable}" Command="{Binding LoginCommand}" Style="{StaticResource ButtonDefault}"  />
 
 
 

@@ -23,8 +23,14 @@
                 <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
             </Style>
-            
-            
+
+            <Style x:Key="ButtonDefault" TargetType="Button">
+                <Setter Property="FontFamily" Value="{DynamicResource FontBold}"></Setter>
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="BackgroundColor" Value="#F70041" />
+            </Style>
 
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
