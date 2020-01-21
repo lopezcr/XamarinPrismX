@@ -42,8 +42,10 @@
                         
                         <Label Text="Contraseña"></Label>
                         <Editor Text="{Binding Password}" Placeholder="Introduce una contraseña" />
-
                         <Button Text="INICIAR SESIÓN" HorizontalOptions="FillAndExpand" Opacity="1" FontSize="12" Margin="0" IsEnabled="{Binding IsEnable}" Command="{Binding LoginCommand}" Style="{StaticResource ButtonDefault}"  />
+
+                        <ActivityIndicator VerticalOptions="CenterAndExpand"
+                            IsRunning="{Binding IsRunning}"></ActivityIndicator>
 
                     </StackLayout>                    
                 </Frame>

@@ -628,6 +628,35 @@ Ver documentacion en synfusion SfTextInputLayout
 #endregion
 
 
+#region ActivityIndicator
+/*     
+     No es nada del otro mundo, solo es como un gif cuando se hace un ajax.
+     Es para indicar al usuario que esta buscando informacion.
+      
+    //en el xaml donde mejor se acomode
+    <ActivityIndicator VerticalOptions="CenterAndExpand"  IsRunning="{Binding IsRunning}"></ActivityIndicator>
+
+    //en el boton se le hace el binding en isEnable
+    <Button Text="INICIAR SESIÓN" HorizontalOptions="FillAndExpand" Opacity="1" FontSize="12" Margin="0" IsEnabled="{Binding IsEnable}" Command="{Binding LoginCommand}" Style="{StaticResource ButtonDefault}"  />
+
+
+    En la vista de modelo solo se actualizo los valores de IsEnable y IsRunning antes y despues de la consulta del  WS
+
+            IsRunning = true;
+            IsEnable = false;            
+            //
+            ...
+            Aqui iria mi consulta al Ws
+            ...
+            //
+
+            IsRunning = false;
+            IsEnable = true;
+
+
+ */
+#endregion
+
 
 
 #region Plantilla-region-MiTitulo-comentario

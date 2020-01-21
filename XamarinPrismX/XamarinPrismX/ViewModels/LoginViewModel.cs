@@ -18,6 +18,9 @@ namespace XamarinPrismX.ViewModels
         private DelegateCommand _MainCommand;
         private readonly IApiService _apiService;
         private string _password;
+        private bool _isRunning;
+        private bool _isEnable;
+
         public string Password
         {
             get => _password;
@@ -43,6 +46,20 @@ namespace XamarinPrismX.ViewModels
         }
 
 
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set => SetProperty(ref _isRunning, value);
+        }
+
+        public bool IsEnable
+        {
+            get => _isEnable;
+            set => SetProperty(ref _isEnable, value);
+        }
+
+
+
 
         public DelegateCommand LoginCommand => _MainCommand ?? (_MainCommand = new DelegateCommand(ExecuteLoginCommand));
         public LoginViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
@@ -64,6 +81,10 @@ namespace XamarinPrismX.ViewModels
                 HasErrorEmail = false;
             }
 
+
+            IsRunning = true;
+            IsEnable = false;
+
             var request = new LoginRequest
             {
                  email = Email,
@@ -72,7 +93,10 @@ namespace XamarinPrismX.ViewModels
 
             var url = App.Current.Resources["UrlAPI"].ToString();
             var response = await _apiService.GetLoginAsync(url, "api", "/login", request);
-                       
+
+
+            IsRunning = false;
+            IsEnable = true;
 
             if (!response.IsSuccess)
             {
