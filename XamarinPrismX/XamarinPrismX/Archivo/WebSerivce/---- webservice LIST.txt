@@ -1,0 +1,398 @@
+EN LA CARPETA Model (si no esta se crea), SE CREA LA CLASE Response, QUE USAMOS PARA OBTENER LOS RESULTADOS DE 
+NUESTRAS CONSULTAS WEBSERVICE.
+
+instale Prism.Plugin.Popups;
+tambien el de JSON
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+DENTRO DEL APP.XAML SE DECLARO UNA VARIABLE DONDE ESTA LA URL API Y LA AGREGAMOS A ESTA APP.XAML
+
+
+		...
+		<x:String x:Key="UrlAPI">http://fc05.facturaclick.cr</x:String> //Solo esta linea
+    </Application.Resources>
+</prism:PrismApplication>
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//este name espace no es necesario pero lo deje para que viera que esta en la carpeta model
+namespace ComedorIndustrial.Prism.Model
+{
+	//desde aqui copiaria
+    public class Response<T> where T : class
+    {
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
+        public T Result { get; set; }
+    }
+}
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+HASTA ABAJO ESTA EL EJEMPLO DEL RESULTADO GET, VER PARA ENTENDER POR QUE ESTA CLASE:
+CREAMOS LA CLASE NOTICIA, CON LOS SIGUIENTES CAMPOS.
+
+
+namespace ComedorIndustrial.Prism.Model
+{
+    public class Noticia
+    {
+        public int IdNoticia { get; set; }
+        public string Titulo { get; set; }
+        public string url { get; set; }
+        public string Autor { get; set; }
+        public string Detalle { get; set; }
+        public DateTime Fecha { get; set; }
+        public DateTime FechaPublicacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        
+    }
+}
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Creamos una clase que recibirara nuestra clase noticia. En este caso tiene dos propiedades por que se requeria 
+dos diferentes consultas, pero con una propiedad puede ser suficiene dependiendo el caso.
+
+    public class NoticiasResponse
+    {
+        public ICollection<Noticia> NoticiasMasLeidas { get; set; }
+        public ICollection<Noticia> NoticiasMasRecientes { get; set; }
+    }
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//Creamos una interface que utilizaremos para realizar nuestra peticion GET
+//En la carpeta Services
+
+namespace ComedorIndustrial.Prism.Services
+{
+    public interface IApiService
+    {
+        Task<Response<NoticiasResponse>> GetListNoticias(
+            string urlBase,
+            string servicePrefix,
+            string controller
+         );
+    }
+}
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//Creamos la clase ApiService en la clase
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using XamarinTestCarusel.Model;
+using Newtonsoft.Json; //¨*********** hay que instalar este
+
+namespace ComedorIndustrial.Prism.Services
+{
+    public class ApiService : IApiService
+    {
+        public async Task<Response<NoticiasResponse>> GetListNoticias(string urlBase, string servicePrefix, string controller)
+        {
+            try
+            {
+
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                var url = $"{urlBase}/{servicePrefix}{controller}";
+                //UriBuilder builder = new UriBuilder(url);
+
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<NoticiasResponse>
+                    {
+                        IsSuccess = false,
+                        Message = JsonConvert.DeserializeObject<string>(result)
+                    };
+                }
+
+                var noticias = JsonConvert.DeserializeObject<NoticiasResponse>(result);
+                return new Response<NoticiasResponse>
+                {
+                    IsSuccess = true,
+                    Result = noticias
+                };
+            }
+            catch (Exception ex)
+            {
+                string msgError;
+                switch (ex.Message)
+                {
+                    case "No such host is known":
+                        msgError = "No se encontro el servidor";
+                        break;
+                    default:
+                        msgError = "No se pudo conectar al servidor";
+                        break;
+                }
+                return new Response<NoticiasResponse>
+                {
+                    IsSuccess = false,
+                    Message = msgError
+                };
+            }
+        }
+    }
+}
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+//El api hay que registrarlo  en el app.xaml.cs dentro de RegisterTypes:
+containerRegistry.Register<IApiService, ApiService>();
+
+
+
+
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+!importante !!!!!!!! con lo que tenemos arriba podemos solicitar la informacion, pero este paso es opcional
+ya que se utilizo para agregar un boton por cada item  de cada noticia.
+en el modelo de la vista pudimos haber utilizado: 
+
+private ObservableCollection<Noticia> _noticiasMasleidas; ******
+
+pero como queremos que cada noticia tenga un buton para ir a la noticia. agregarmos esta vista de modelo
+y quedari asi en la modelo de la vista:
+private ObservableCollection<NoticiaItemViewModel> _noticiasMasleidas;
+
+
+
+
+namespace ComedorIndustrial.Prism.ViewModels
+{
+    public class NoticiaItemViewModel : Noticia
+    {
+        private readonly INavigationService _navigationService;
+        private DelegateCommand _selectNoticiaCommand;
+
+        public NoticiaItemViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        public DelegateCommand SelectNoticiaCommand => _selectNoticiaCommand ?? (_selectNoticiaCommand = new DelegateCommand(ShowNoticia));
+
+        private async void ShowNoticia()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add("noticia", this);
+
+            await _navigationService.NavigateAsync("NoticiaDetallePage", parameters);
+        }
+    }
+}
+
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+EN EL MODELO DE LA VISTA REALIZAMOS LO SIGUIENTE, IMPORTANTE la vista debe heredar de ViewModelBase
+
+//para este ejemplo se realizo con el customDialog class, ver archivo.
+
+
+private readonly INavigationService _navigationService;
+private readonly IApiService _apiService;
+private readonly IDialogService _dialogService;
+private ObservableCollection<NoticiaItemViewModel> _noticiasMasleidas;
+private ObservableCollection<NoticiaItemViewModel> _noticiasRecientes;
+
+
+public ObservableCollection<NoticiaItemViewModel> NoticiasMasLeidas
+{
+	get => _noticiasMasleidas;
+	set => SetProperty(ref _noticiasMasleidas, value);
+}
+
+public ObservableCollection<NoticiaItemViewModel> NoticiasRecientes
+{
+	get => _noticiasRecientes;
+	set => SetProperty(ref _noticiasRecientes, value);
+}
+
+
+//En el constructor de la modelo de la vista
+public NoticiasPageViewModel(INavigationService navigationService, IApiService apiService, IDialogService dialogService) : base(navigationService)
+{
+	_navigationService = navigationService;
+	_apiService = apiService;
+	_dialogService = dialogService;
+	IsRunning = true;
+	IsVisible = false;
+}
+		
+public override void OnNavigatedTo(INavigationParameters parameters)
+{
+	base.OnNavigatedTo(parameters);
+	var navigationMode = parameters.GetNavigationMode();
+	if (navigationMode == NavigationMode.New)
+	{
+		LoadData();
+	}
+}
+
+private async void LoadData()
+        {
+            IsRunning = true; //no es importante para el ejemplo webservice
+            IsVisible = false;//no es importante para el ejemplo webservice
+
+            try
+            {
+                var url = App.Current.Resources["UrlAPI"].ToString();
+                var response = await _apiService.GetListNoticias(url, "WebApiCorporativo/api", "/Noticias");
+                if (!response.IsSuccess)
+                {
+                    IsRunning = false;
+                    CustomDialog.ShowAlert(_dialogService, "Error", response.Message.ToString());
+                    return;
+                }
+
+                var _data = response.Result;
+
+                NoticiasMasLeidas = new ObservableCollection<NoticiaItemViewModel>(
+                    _data.NoticiasMasLeidas.Select(n => new NoticiaItemViewModel(_navigationService) 
+                    {
+                        Autor = n.Autor,
+                        Fecha = n.Fecha,
+                        Titulo = n.Titulo,
+                        Detalle = n.Detalle,
+                        FechaCreacion = n.FechaCreacion,
+                        FechaPublicacion = n.FechaPublicacion,
+                        IdNoticia = n.IdNoticia,
+                        url = n.url
+                    }).ToList());
+
+                NoticiasRecientes = new ObservableCollection<NoticiaItemViewModel>(
+                    _data.NoticiasMasRecientes.Select(n => new NoticiaItemViewModel(_navigationService)
+                    {
+                        Autor = n.Autor,
+                        Fecha = n.Fecha,
+                        Titulo = n.Titulo,
+                        Detalle = n.Detalle,
+                        FechaCreacion = n.FechaCreacion,
+                        FechaPublicacion = n.FechaPublicacion,
+                        IdNoticia = n.IdNoticia,
+                        url = n.url
+                    }).ToList());
+
+
+                await Task.Delay(1000);
+                IsRunning = false;
+                IsVisible = true;
+            }
+            catch (Exception ex)
+            {
+                IsRunning = false;
+                var msg = ex.Message;
+                IsVisible = true;
+            }
+        }
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//En la vista
+//importante hay que instalar con el nuget el xamarin.forms
+
+
+ <CollectionView ItemsSource="{Binding NoticiasMasLeidas}" >
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" 
+                           ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate >
+                                    <Grid>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectNoticiaCommand}" NumberOfTapsRequired="1" />
+                                        </Grid.GestureRecognizers>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="150" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="320" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout>
+                                            <Frame CornerRadius="15" Padding="0" IsClippedToBounds="True" HeightRequest="150">
+                                                <ffimageloading:CachedImage  Aspect="AspectFill" 
+                                                                    LoadingPlaceholder="Loading..." 
+                                                                    ErrorPlaceholder="ErrorImagen" 
+                                                                    CacheDuration="50"
+                                                                            HeightRequest="150"
+                                                                    RetryDelay="600"                                                                        
+			                            DownsampleToViewSize="true"
+			                            Source = "{Binding url}">
+                                                </ffimageloading:CachedImage>
+                                            </Frame>
+                                            <Label Text="{Binding Titulo}" 
+                                           TextColor="Black" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold" 
+                                           Padding="0" Margin="0" 
+                                           HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" MaxLines="1" />
+                                            <StackLayout Orientation="Horizontal" Margin="-2">
+                                                <Image Source="iconsstar.png" />
+                                                <Label Text="{Binding Autor}" TextColor="#bdbcc2" FontSize="15" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand"></Label>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+ </CollectionView>
+
+
+		
+		
+
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+http://fc05.facturaclick.cr/WebApiCorporativo/api/Noticias
+//EJEMPLO CASO GET, PARA ESTE CASO TENDREMOS COMO RESPUESTA UN JSON CON LOS SIGUIENTES DATOS.
+
+{
+    "NoticiasMasLeidas": [
+        {
+            "IdNoticia": 12,
+            "Titulo": "Tips para que cuide su alimentación en época de fiestas",
+            "url": "http://fc05.facturaclick.cr/WebApiCorporativo/Imagenes/Noticias/Noticia_12.jpg",
+            "Autor": "Redaccion",
+            "Detalle": "Aqui va el detalle de la noticia",
+            "Tipo": 1,
+            "Fecha": "2019-12-02T00:00:00",
+            "FechaPublicacion": "2019-12-05T00:00:00",
+            "FechaCreacion": "2019-12-04T10:17:08.643"
+        },
+        {
+            "IdNoticia": 11,
+            "Titulo": "Comercio y consumo de comida basura de bajo precio, obstáculo para dietas saludables",
+            "url": "http://fc05.facturaclick.cr/WebApiCorporativo/Imagenes/Noticias/Noticia_11.jpg",
+            "Autor": "Redaccion",
+            "Detalle": " Otro detalle de la noticia",
+            "Tipo": 1,
+            "Fecha": "2018-09-13T00:00:00",
+            "FechaPublicacion": "2019-12-04T00:00:00",
+            "FechaCreacion": "2019-12-04T10:13:02.82"
+        }
+
+}

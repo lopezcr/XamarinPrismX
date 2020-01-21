@@ -33,5 +33,6 @@
             </Style>
 
         </ResourceDictionary>
+        <x:String x:Key="UrlAPI">https://reqres.in</x:String>
     </prism:PrismApplication.Resources>
 </prism:PrismApplication>

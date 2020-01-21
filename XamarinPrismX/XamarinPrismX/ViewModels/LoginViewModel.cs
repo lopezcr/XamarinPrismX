@@ -4,6 +4,8 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XamarinPrismX.Model;
+using XamarinPrismX.Services;
 
 namespace XamarinPrismX.ViewModels
 {
@@ -14,6 +16,13 @@ namespace XamarinPrismX.ViewModels
         private bool _hasErrorEmail;
         private string _email;
         private DelegateCommand _MainCommand;
+        private readonly IApiService _apiService;
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
 
         public string Email
         {
@@ -36,9 +45,10 @@ namespace XamarinPrismX.ViewModels
 
 
         public DelegateCommand LoginCommand => _MainCommand ?? (_MainCommand = new DelegateCommand(ExecuteLoginCommand));
-        public LoginViewModel(INavigationService navigationService) : base(navigationService)
+        public LoginViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
+            _apiService = apiService;
         }
 
         async void ExecuteLoginCommand()
@@ -53,6 +63,24 @@ namespace XamarinPrismX.ViewModels
             {
                 HasErrorEmail = false;
             }
+
+            var request = new LoginRequest
+            {
+                 email = Email,
+                 password = Password
+            };
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var response = await _apiService.GetLoginAsync(url, "api", "/login", request);
+                       
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", response.Message.ToString(), "Ok");
+                //CustomDialog.ShowAlert(_dialogService, "Error", response.Message.ToString());
+                return;
+            }
+
 
             var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }

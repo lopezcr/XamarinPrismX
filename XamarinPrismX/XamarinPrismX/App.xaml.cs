@@ -4,6 +4,7 @@ using XamarinPrismX.ViewModels;
 using XamarinPrismX.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinPrismX.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamarinPrismX
@@ -34,6 +35,8 @@ namespace XamarinPrismX
             containerRegistry.RegisterForNavigation<Principal, PrincipalViewModel>();
             containerRegistry.RegisterForNavigation<VistaC, VistaCViewModel>();
             containerRegistry.RegisterForNavigation<Login, LoginViewModel>();
+
+            containerRegistry.Register<IApiService, ApiService>();
         }
     }
 }

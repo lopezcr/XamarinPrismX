@@ -596,6 +596,38 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region WebServices Busqueda de usaurio.
+/*     
+  Para este ejemplo voy a usar el ejemplo de https://reqres.in/
+  Para este ejemplo si esta medio canijo poner todo aqui, asi que agregue el archivo que habia creado esta en Archivo/Webservice
+  
+  El ejemplo me parece bueno bueno, quizas solo hay que adaptarlo a las necesidades. y como sea tambien hago el ejemplo del login en este proyecto.
+  Existe diferencias entre una solicitud Get Post, especialmente de la informacion  que se envia.
+
+  En esa misma carpeta hay otros ejemplo, especialmente interesante de como se envia un token de verificacion de la informacion.
+
+   No pondre todo pero pondre todos los archivos que cree y modifique
+
+    Cree:
+    Model/Response
+    Model/LoginRequest
+    Model/LoginResponse
+    Services/IApiService
+    Services/ApiService
+
+
+    Modifique:
+    LoginViewModel
+    App.Xaml
+    App.Xaml.cs
+    login.xaml (solo el entry del password)
+
+
+
+ */
+#endregion
+
+
 
 
 #region Plantilla-region-MiTitulo-comentario
