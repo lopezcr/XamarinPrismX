@@ -657,6 +657,67 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Guardar sesion del usuario logueado y cerrar sesion
+/*     
+ Para este hay que instalar el Xam.Plugins.Settings
+
+    Creo la carpeta  Helpers y el archivo Settings.cs , para este archivo no agregare notas, solo revisar.
+
+    //-----------------------------------------------------------------------------------------------------------
+    //Anteriormente ya se habia realizado la verificcion del usuario con WS, ahora guardaremos la informacion en loginViewModel, justo despues de verificar que el resultado IsSucess is true
+
+    LoginResponse user = response.Result;
+    Settings.User = JsonConvert.SerializeObject(user.Token);//en realidad en el ejemplo original era user.Cliente con varias propieades, como nombre, edad, etc, etc. Info del cliente, mi ejemplo es sencillo
+    Settings.IsLogin = true;
+    Application.Current.Properties["IsLoggedIn"] = Boolean.TrueString; //using Xamarin.Forms;
+
+    var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+    
+    
+
+    //-----------------------------------------------------------------------------------------------------------
+    //en el app.xaml.cs se actualiza la primera navegacion validadndo si el usuario esta logueado
+    protected override async void OnInitialized()
+        {
+            InitializeComponent();
+
+            if (Settings.IsLogin == true)
+            {
+                var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/Login");
+            }
+
+            //await NavigationService.NavigateAsync("NavigationPage/Login");
+        }
+
+    //-------------------------------------------------------------------------------------------------------------
+    Para cerrar sesion se agregar un link o boton donde se requiera
+
+    <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    en el viewModel se crea las propiedades y commando (ver navegacion) necesario para navegar, en el EXECUTE se agrega el siguiente codigo.
+
+        async void ExecuteCerrarSesion()
+        {
+            Settings.IsLogin = false;
+            Settings.User = string.Empty;
+            await _navigationService.NavigateAsync("/Login");
+        }
+
+    
+      
+ */
+#endregion
+
+
+
 
 
 #region Plantilla-region-MiTitulo-comentario

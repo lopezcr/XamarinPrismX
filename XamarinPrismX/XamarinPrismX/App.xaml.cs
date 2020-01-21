@@ -5,6 +5,7 @@ using XamarinPrismX.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinPrismX.Services;
+using XamarinPrismX.Helpers;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamarinPrismX
@@ -24,7 +25,16 @@ namespace XamarinPrismX
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/Login");
+            if (Settings.IsLogin == true)
+            {
+                var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/Login");
+            }
+
+            //await NavigationService.NavigateAsync("NavigationPage/Login");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

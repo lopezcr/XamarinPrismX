@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XamarinPrismX.Helpers;
 
 namespace XamarinPrismX.ViewModels
 {
@@ -12,7 +13,9 @@ namespace XamarinPrismX.ViewModels
     {
         private readonly INavigationService _navigationService;
         private DelegateCommand _navigateCommand;
+        private DelegateCommand _cerrarSessionCommand;
         public DelegateCommand NavigateCommand => _navigateCommand ?? (_navigateCommand = new DelegateCommand(ExecuteNavigateCommand));
+        public DelegateCommand CerrarSesionCommand => _cerrarSessionCommand ?? (_cerrarSessionCommand = new DelegateCommand(ExecuteCerrarSesion));
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -24,6 +27,13 @@ namespace XamarinPrismX.ViewModels
         {
             await _navigationService.NavigateAsync("ViewB");
             //await _navigationService.GoBackAsync();
+        }
+        
+        async void ExecuteCerrarSesion()
+        {
+            Settings.IsLogin = false;
+            Settings.User = string.Empty;
+            await _navigationService.NavigateAsync("/Login");
         }
 
     }

@@ -7,6 +7,14 @@
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Welcome to Xamarin Forms and Prism!" />
         <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
+
+        <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+
     </StackLayout>
 
 </ContentPage>

@@ -1,11 +1,15 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
+using XamarinPrismX.Helpers;
 using XamarinPrismX.Model;
 using XamarinPrismX.Services;
+ 
 
 namespace XamarinPrismX.ViewModels
 {
@@ -104,6 +108,11 @@ namespace XamarinPrismX.ViewModels
                 //CustomDialog.ShowAlert(_dialogService, "Error", response.Message.ToString());
                 return;
             }
+
+            LoginResponse user = response.Result;
+            Settings.User = JsonConvert.SerializeObject(user.Token);//en realidad en el ejemplo original era user.Cliente con varias propieades, como nombre, edad, etc, etc. Info del cliente, mi ejemplo es sencillo
+            Settings.IsLogin = true;
+            Application.Current.Properties["IsLoggedIn"] = Boolean.TrueString; //using Xamarin.Forms;
 
 
             var result = await NavigationService.NavigateAsync("/NavigationPage/MainPage");
