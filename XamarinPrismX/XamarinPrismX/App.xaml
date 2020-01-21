@@ -3,9 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              x:Class="XamarinPrismX.App">
-	<Application.Resources>
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
 
-		<!-- Application resource dictionary -->
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontRegular">
+                <On Platform="iOS" Value="Intro-Regular" />
+                <On Platform="Android" Value="IntroRegular.otf#IntroRegular" />
+            </OnPlatform>
+            
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontFamily" iOS="FontAwesome5FreeSolid" Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free-Solid-900" />
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontFamilyRegular" iOS="FontAwesome5FreeRegular" Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free-Solid-900" />
+            
 
-	</Application.Resources>
+            <Style x:Key="EntryNormal" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{DynamicResource FontRegular}"></Setter>
+            </Style>
+            <Style x:Key="IconStyleSolid" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+            </Style>
+            
+            
+
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
 </prism:PrismApplication>

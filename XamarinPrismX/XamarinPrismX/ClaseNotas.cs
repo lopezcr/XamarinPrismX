@@ -403,6 +403,131 @@ parameters.TryGetValue<string>("title");
  */
 #endregion
 
+#region Login mejorado (sin binding y validacion)
+/*
+ Formulario synfusion, ademas de usar el inputLayout:SfTextInputLayout , hare el binding y utilizare unos estilos
+ el formulario sigue siendo en el mismo login y los estilos estan en el app.xaml
+ instale el synfusion license y Syncfusion Xamarin core para poder utillizar el inputLayout:SfTextInputLayout
+
+ En este commint solo mejore el estilo de login con algunas herramientas extras.
+ Creo que principalmente de usar las herramientas de inputLayout:SfTextInputLayout que es como un input text
+ es que sobre todo tiene ciertas caracteriticas por ejemplo el manejo de errores entre otros
+ Para este ejemplo y para no complicarlos a la hora de volver a este codigo, solo utilizare el inputLayout:SfTextInputLayout en el usuario.
+
+Ver documentacion en synfusion SfTextInputLayout
+ 
+     ***************************
+     Para este ejemplo instale fonts, en android/assets...IntroRegular.otf , IntroBlack.otf entre otros
+     *************************
+
+
+
+    /------------------------------------------------------------------------------------------------------------------/
+    en el login
+    Este es para input de synfusion, explicare las cosas necesarias. Mas abajo esta el codigo de los estilos, primero hay que agregar los estilo o no funciona el xaml
+    /------------------------------------------/
+    /------------------------------------------/
+    /------------------------------------------/
+
+    <inputLayout:SfTextInputLayout
+        FocusedColor="#ee3837"|
+            ContainerType="Outlined"
+            OutlineCornerRadius="5"
+            ContainerBackgroundColor="White"
+        LeadingViewPosition="Inside"
+        HasError="{Binding HasErrorEmail}"
+        ErrorText="{Binding ErrorTextEmail}"
+        Hint="Correo Electrónico"
+            Margin="0"
+            Padding="0"                               
+        >
+        <inputLayout:SfTextInputLayout.LeadingView>
+            <Label Text="&#xf007;" Style="{StaticResource IconStyleSolid}" />
+        </inputLayout:SfTextInputLayout.LeadingView>
+        <inputLayout:SfTextInputLayout.HintLabelStyle>
+            <inputLayout:LabelStyle>
+                <inputLayout:LabelStyle.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" iOS="IntroRegular" Android="IntroRegular.otf#IntroRegular" />
+                </inputLayout:LabelStyle.FontFamily>
+            </inputLayout:LabelStyle>
+        </inputLayout:SfTextInputLayout.HintLabelStyle>
+        <Entry Keyboard="Email" x:Name="TxtEmail" Text="{Binding Email}" BackgroundColor="#f6f6f6" Style="{StaticResource EntryNormal}" />
+    </inputLayout:SfTextInputLayout>
+
+    --------------------------------------------------------------
+    Explicacion del codigo anterior.
+
+            ContainerType...contorno alrededor del input
+        OutlineCornerRadius .... Es el borde
+        LeadingViewPosition...El icono adentro o afuera del input
+        HasError...para la validacion del error
+        ErrorText...para el error.
+        Hint... es como el placeholder
+
+        //Esto es para el icono
+        <inputLayout:SfTextInputLayout.LeadingView>
+	        <Label Text="&#xf007;" Style="{StaticResource IconStyleSolid}" />
+        </inputLayout:SfTextInputLayout.LeadingView>
+
+        //este desmadrito solo es para el estilo del placeholder
+        <inputLayout:SfTextInputLayout.HintLabelStyle>
+	        <inputLayout:LabelStyle>
+		        <inputLayout:LabelStyle.FontFamily>
+			        <OnPlatform x:TypeArguments="x:String" iOS="IntroRegular" Android="IntroRegular.otf#IntroRegular" />
+		        </inputLayout:LabelStyle.FontFamily>
+	        </inputLayout:LabelStyle>
+        </inputLayout:SfTextInputLayout.HintLabelStyle>
+
+        //Aqui es realmente donde el usuario escribe
+        <Entry Keyboard="Email" x:Name="TxtEmail" Text="{Binding Email}" BackgroundColor="#f6f6f6" Style="{StaticResource EntryNormal}" />
+
+
+
+
+
+
+    /-------------------------------------------------------------------------------------------------------------------------/
+    el App.xaml para los estilos
+    Estos estilos y fuentes son usados en el formulario login, creo que agregue demas en los assets, pero en este xaml es lo requerido
+    Aqui tambien esta para el icono de usuario :)
+    /------------------------------------------/
+    /------------------------------------------/
+    /------------------------------------------/
+    <?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             x:Class="XamarinPrismX.App">
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontRegular">
+                <On Platform="iOS" Value="Intro-Regular" />
+                <On Platform="Android" Value="IntroRegular.otf#IntroRegular" />
+            </OnPlatform>
+            
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontFamily" iOS="FontAwesome5FreeSolid" Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free-Solid-900" />
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontFamilyRegular" iOS="FontAwesome5FreeRegular" Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free-Solid-900" />
+            
+
+            <Style x:Key="EntryNormal" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{DynamicResource FontRegular}"></Setter>
+            </Style>
+            <Style x:Key="IconStyleSolid" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>
+ 
+ */
+#endregion
+
+
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     

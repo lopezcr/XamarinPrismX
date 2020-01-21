@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="XamarinPrismX.Views.Login">
+             x:Class="XamarinPrismX.Views.Login"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             >
     
     <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Image  AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" Source="Lemillion.jpg" AnchorX="800" AnchorY="1000"></Image>
@@ -11,8 +13,36 @@
             <StackLayout Orientation="Vertical"  VerticalOptions="Center">
                 <Frame Padding="10" >
                     <StackLayout>
-                        <Label Text="Usuario"></Label>
-                        <Editor Text="I am an Editor" />
+
+
+                        <inputLayout:SfTextInputLayout
+                            FocusedColor="#ee3837"
+                                ContainerType="Outlined"
+                                OutlineCornerRadius="5"
+                                ContainerBackgroundColor="White"
+                            LeadingViewPosition="Inside"
+                            HasError="{Binding HasErrorEmail}"
+                            ErrorText="{Binding ErrorTextEmail}"
+                            Hint="Correo Electrónico"
+                                Margin="0"
+                                Padding="0"                               
+                            >
+                            <inputLayout:SfTextInputLayout.LeadingView>
+                                <Label Text="&#xf007;" Style="{StaticResource IconStyleSolid}" />
+                            </inputLayout:SfTextInputLayout.LeadingView>
+                            <inputLayout:SfTextInputLayout.HintLabelStyle>
+                                <inputLayout:LabelStyle>
+                                    <inputLayout:LabelStyle.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String" iOS="IntroRegular" Android="IntroRegular.otf#IntroRegular" />
+                                    </inputLayout:LabelStyle.FontFamily>
+                                </inputLayout:LabelStyle>
+                            </inputLayout:SfTextInputLayout.HintLabelStyle>
+                            <Entry Keyboard="Email" x:Name="TxtEmail" Text="{Binding Email}" BackgroundColor="#f6f6f6" Style="{StaticResource EntryNormal}" />
+                        </inputLayout:SfTextInputLayout>
+
+
+
+
 
                         <Label Text="Contraseña"></Label>
                         <Editor Text="" Placeholder="Introduce una contraseña" />
