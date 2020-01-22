@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamarinPrismX.Views.ListadoColorPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms">
 
@@ -45,10 +46,37 @@
                         </Grid>
                     </shimmer:SfShimmer.CustomView>
                         <shimmer:SfShimmer.Content>
-                           <StackLayout>
-                                    <Label Text="(Aqui meto lo q quiera) Content is loaded! " HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                </StackLayout>
-                        </shimmer:SfShimmer.Content>
+
+
+                        <CollectionView ItemsSource="{Binding InfoPantoneWS.data}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" 
+                           ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>                                        
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="90" />
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Source="{Binding Image}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ></Image>
+                                            <Label Text="{Binding name}" Grid.Row="0" Grid.Column="1" ></Label>
+                                            <Label Text="{Binding color}" Grid.Row="1" Grid.Column="1"></Label>
+                                        </Grid>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </shimmer:SfShimmer.Content>
                 </shimmer:SfShimmer>
             </StackLayout>
         </Grid>

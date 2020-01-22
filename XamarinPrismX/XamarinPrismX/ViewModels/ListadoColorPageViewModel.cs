@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XamarinPrismX.Model;
 using XamarinPrismX.Services;
 
 namespace XamarinPrismX.ViewModels
@@ -12,6 +13,8 @@ namespace XamarinPrismX.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private PantoneResponse _infoPantoneWS; 
+
 
         private bool _isRunning;
  
@@ -21,7 +24,12 @@ namespace XamarinPrismX.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
- 
+        public PantoneResponse InfoPantoneWS
+        {
+            get => _infoPantoneWS;
+            set => SetProperty(ref _infoPantoneWS, value);
+        }
+
         public ListadoColorPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
@@ -31,8 +39,8 @@ namespace XamarinPrismX.ViewModels
 
         public async void loadData()
         {
-            IsRunning = true;          
-
+            IsRunning = true;
+            InfoPantoneWS = new PantoneResponse();
             try {
                 var url = App.Current.Resources["UrlAPI"].ToString();
                 var response = await _apiService.GetPantone(url, "api", "/unknown");
@@ -45,8 +53,8 @@ namespace XamarinPrismX.ViewModels
                 }
 
                 //Aqui cargo todo bien :)
-                IsRunning = false;                
-                var _data = response.Result;
+                IsRunning = false;
+                InfoPantoneWS = response.Result;
             }             
             catch(Exception ex)
             {

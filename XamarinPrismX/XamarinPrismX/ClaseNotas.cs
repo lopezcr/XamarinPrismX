@@ -823,6 +823,69 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Mostrar lista de recuperada con WebService (CollectionView)
+/*     
+ 
+    Vamos a trabajar sobre el content del shimmer con un contentView
+    Como mi Ws no trae ninguna imagen yo agregue harcodeado la misma imagen para cada item de mi WS
+
+    ----------------------------------------------------------------------------------------------------
+    ConllectionView tampoco es tanto rollo, solo es esto, para mostrar la informacion. super simple solo mostrando un label
+    El chiste es cuando se quiere agregar un formato del listado
+    En este ejemplo InfoPantoneWS.data, data es el list , osea que puedo haber sido de otra forma ejemplo : ItemsSource="{Binding Milista}"
+
+     <CollectionView ItemsSource="{Binding InfoPantoneWS.data}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" 
+            ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding name}"></Label>
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    ----------------------------------------------------------------------------------------------------
+    Este es un ejemplo con mas informacion pero sin tanto formato, no le quise meter tanto formato para hacer mas facil la lectura del ejemplo.
+    Obviamente se le puede meter mas formato, pero hay la deje
+
+        <CollectionView ItemsSource="{Binding InfoPantoneWS.data}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" 
+        ItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>                                        
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90" />
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="{Binding Image}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ></Image>                                           
+                        <Label Text="{Binding name}" Grid.Row="0" Grid.Column="1" ></Label>
+                        <Label Text="{Binding color}" Grid.Row="1" Grid.Column="1"></Label>
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+ */
+#endregion
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     

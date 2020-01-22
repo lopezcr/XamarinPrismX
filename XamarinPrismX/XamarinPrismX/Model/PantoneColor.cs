@@ -11,5 +11,7 @@ namespace XamarinPrismX.Model
         public int year { get; set; }
         public string color { get; set; }
         public string pantone_value { get; set; }
+
+        public string Image { get; set; } = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/my-hero-academia-4-trailer-1567404314.jpg";
     }
 }
