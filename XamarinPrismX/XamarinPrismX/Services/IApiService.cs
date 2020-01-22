@@ -14,5 +14,16 @@ namespace XamarinPrismX.Services
             string controller,
             LoginRequest request
          );
+
+        Task<Response<PantoneResponse>> GetPantone(
+            string urlBase,
+            string servicePrefix,
+            string controller            
+         );
+
+
     }
+
+
+
 }

@@ -717,7 +717,18 @@ Ver documentacion en synfusion SfTextInputLayout
 #endregion
 
 
+#region Mostrar lista de recuperada con WebService (Preparacion)
+/*     
+      Voy a crear dos vista, una donde muestre el listado que se obtenga del viewmodel y otra donde se navegue si se le da click a un item del listado.
+      En esta prepracion hare cosas que estan mejor explicados en puntos anteriores asi que no hay mucho que revisar aqui, solo es para que no haya tantos
+      archivos en el commit que me interesa.
+      Tambien hare el WS del listado a obtener.
+      Tambien realizare el Ws del listado de la pagina https://reqres.in/
 
+      En el siguiente commit usare el shimmer, pero ya viene dentro del synfusion core, asi que no hace falta instalar
+      
+ */
+#endregion
 
 
 #region Plantilla-region-MiTitulo-comentario

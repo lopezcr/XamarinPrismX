@@ -65,5 +65,58 @@ namespace XamarinPrismX.Services
             }
         }
 
+        public async Task<Response<PantoneResponse>> GetPantone(string urlBase, string servicePrefix, string controller)
+        {
+            try
+            {
+
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                var url = $"{urlBase}/{servicePrefix}{controller}";
+                //UriBuilder builder = new UriBuilder(url);
+
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<PantoneResponse>
+                    {
+                        IsSuccess = false,
+                        Message = JsonConvert.DeserializeObject<string>(result)
+                    };
+                }
+
+                var token = JsonConvert.DeserializeObject<PantoneResponse>(result);
+                return new Response<PantoneResponse>
+                {
+                    IsSuccess = true,
+                    Result = token
+                };
+            }
+            catch (Exception ex)
+            {
+                string msgError;
+                switch (ex.Message)
+                {
+                    case "No such host is known":
+                        msgError = "No se encontro el servidor";
+                        break;
+                    default:
+                        msgError = "No se pudo conectar al servidor";
+                        break;
+                }
+                return new Response<PantoneResponse>
+                {
+                    IsSuccess = false,
+                    Message = msgError
+                };
+            }
+        }
+
+
     }
 }
