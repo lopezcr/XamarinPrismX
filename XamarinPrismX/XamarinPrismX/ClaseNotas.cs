@@ -1063,6 +1063,31 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Carousel (Vista)
+/*   
+ Para estos ejemplo en produccion deberia haber validacion y mensajes de errores y el shimmer
+ Pero como es para ejemplifiar el carousel solo hare el carousel sin mas.
+ En el punto anterior ya se creo el contentPage y se traje el Ws del ejemplo de "Mostrar lista de recuperada con WebService"
+ No le metere diseño por que no es caso.
+
+    En este ejemplo no hay tanto rollo, solo es ItemSource
+
+       <ScrollView>
+        <StackLayout>
+            <CarouselView x:Name="Carousel" ItemsSource="{Binding ListaColores}" VerticalOptions="StartAndExpand">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding name}"  FontSize="30"></Label>
+                            <Image Source="{Binding Image}"></Image>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </StackLayout>
+    </ScrollView>
+ */
+#endregion
 
 
 #region Plantilla-region-MiTitulo-comentario

@@ -4,6 +4,22 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamarinPrismX.Views.CarouselSimple">
-    <Label Text="Aqui ira mi carousel"></Label>
+
+    <ScrollView>
+        <StackLayout>
+            <CarouselView x:Name="Carousel" ItemsSource="{Binding ListaColores}" VerticalOptions="StartAndExpand">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding name}"  FontSize="30"></Label>
+                            <Image Source="{Binding Image}"></Image>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </StackLayout>
+    </ScrollView>
+    
+    
   
 </ContentPage>
