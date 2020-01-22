@@ -1054,6 +1054,17 @@ Ver documentacion en synfusion SfTextInputLayout
 
 
 
+#region Carousel (Preparacion)
+/*  
+ Creo el contentPage/vista y la navegacion   
+ y utilizo el mismo Ws del ejemplo anterior
+   
+   
+ */
+#endregion
+
+
+
 #region Plantilla-region-MiTitulo-comentario
 /*     
  */

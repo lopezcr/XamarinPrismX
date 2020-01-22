@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinPrismX.Views.MainPage"
+             xmlns:prism="http://prismlibrary.com"
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Welcome to Xamarin Forms and Prism!" />
         <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
         <Button Text="Listado Colores" Command="{Binding ListadoColoresCommand}"/>
+        <Button Text="Carousel simple" Command="{prism:NavigateTo CarouselSimple}" />
 
         
         <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >
@@ -15,8 +17,6 @@
                 <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
             </Label.GestureRecognizers>
         </Label>
-
-
     </StackLayout>
 
 </ContentPage>

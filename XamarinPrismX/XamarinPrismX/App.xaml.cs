@@ -49,6 +49,7 @@ namespace XamarinPrismX
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<ListadoColorPage, ListadoColorPageViewModel>();
             containerRegistry.RegisterForNavigation<PantoneColorDetalle, PantoneColorDetalleViewModel>();
+            containerRegistry.RegisterForNavigation<CarouselSimple, CarouselSimpleViewModel>();
         }
     }
 }
