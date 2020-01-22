@@ -4,5 +4,6 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamarinPrismX.Views.PantoneColorDetalle">
+    <Label Text="{Binding ColorPantone.name}"></Label>
   
 </ContentPage>

@@ -13,8 +13,7 @@ namespace XamarinPrismX.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private PantoneResponse _infoPantoneWS; 
-
+        private List<PantoneColorViewModel> _listaColores;
 
         private bool _isRunning;
  
@@ -24,10 +23,10 @@ namespace XamarinPrismX.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public PantoneResponse InfoPantoneWS
+        public List<PantoneColorViewModel> ListaColores
         {
-            get => _infoPantoneWS;
-            set => SetProperty(ref _infoPantoneWS, value);
+            get => _listaColores;
+            set => SetProperty(ref _listaColores, value);
         }
 
         public ListadoColorPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
@@ -40,21 +39,32 @@ namespace XamarinPrismX.ViewModels
         public async void loadData()
         {
             IsRunning = true;
-            InfoPantoneWS = new PantoneResponse();
-            try {
+            //ListaColores = new List<PantoneColorViewModel>();
+            try
+            {
                 var url = App.Current.Resources["UrlAPI"].ToString();
                 var response = await _apiService.GetPantone(url, "api", "/unknown");
                 if (!response.IsSuccess)
                 {
                     IsRunning = false;
-                   
+
                     //CustomDialog.ShowAlert(_dialogService, "Error", response.Message.ToString());
                     return;
                 }
 
                 //Aqui cargo todo bien :)
-                IsRunning = false;
-                InfoPantoneWS = response.Result;
+                IsRunning = false; 
+
+                ListaColores = new List<PantoneColorViewModel>(
+                    response.Result.data.Select(x=> new PantoneColorViewModel(_navigationService) {
+                        color = x.color,
+                        id = x.id,
+                        Image = x.Image,
+                        name = x.name
+                    })
+                    ).ToList();
+                
+
             }             
             catch(Exception ex)
             {

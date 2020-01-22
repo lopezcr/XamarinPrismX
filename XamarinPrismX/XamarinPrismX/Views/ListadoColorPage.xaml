@@ -48,7 +48,7 @@
                         <shimmer:SfShimmer.Content>
 
 
-                        <CollectionView ItemsSource="{Binding InfoPantoneWS.data}">
+                        <CollectionView ItemsSource="{Binding ListaColores}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" 
                            ItemSpacing="10" />
@@ -58,6 +58,9 @@
                                 <DataTemplate>
                                     <StackLayout>                                        
                                         <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectColorCommand}" NumberOfTapsRequired="1" />
+                                            </Grid.GestureRecognizers>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="90" />
                                                 <RowDefinition Height="*"/>

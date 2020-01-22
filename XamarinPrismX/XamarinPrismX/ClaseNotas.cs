@@ -885,6 +885,173 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Mostrar lista de recuperada con WebService (Ver detalle navegacion)
+/*     
+      Primer cambio, en lugar de usar para el InfoPantoneWS.data en el  ItemsSource del collectionview, usare una variable del tipo list<miVariable> (del tipo PantoneColor (hare un viewModel)) , osea lo mismo, pero no necesiate una clase base
+      osea lo dejare asi:
+      <CollectionView ItemsSource="{Binding MiVariable}">
+
+
+      -------------------
+       Creo la nueva clase viewmodel  del tipo PantoneColor
+       public class PantoneColorViewModel : PantoneColor
+        {
+          //primero lo voy a crear y luego lo actualizare para hacer la navegacion, ahorita solo hare el cambio para usar mas facil el collectionview
+        }
+      -------------------
+      En viewmodel de la vista creo su campo privado y su propiedad
+      
+      private List<PantoneColorViewModel> _listaColores;
+
+      public List<PantoneColorViewModel> ListaColores
+        {
+            get => _listaColores;
+            set => SetProperty(ref _listaColores, value);
+        }
+
+     -------------------
+     cuando obtengo el  WS asigno los valores a mi nueva variable
+
+        ListaColores = new List<PantoneColorViewModel>(
+                        response.Result.data.Select(x=> new PantoneColorViewModel() {
+                            color = x.color,
+                            id = x.id,
+                            Image = x.Image,
+                            name = x.name
+                        })
+                        ).ToList();
+
+      -------------------
+      Ahora si puedo actualizar mi collectionView en mi vista
+
+      <CollectionView ItemsSource="{Binding ListaColores}">
+
+
+
+
+
+
+     ------------------------------------------------
+     ------------------------------------------------
+     ------------------------------------------------
+     ************************************************
+     ACTUALIZO PARA NAVEGAR
+      ************************************************
+
+
+     Para poder navegar ahora tengo que actualizar mi PantoneColorViewModel
+
+        public class PantoneColorViewModel : PantoneColor
+        {
+            private readonly INavigationService _navigationService;
+            private DelegateCommand _selectColorCommand;
+
+            public DelegateCommand SelectColorCommand => _selectColorCommand ?? (_selectColorCommand = new DelegateCommand(ShowColor));
+            public PantoneColorViewModel(INavigationService navigationService)
+            {
+                _navigationService = navigationService;
+            }
+
+            private async void ShowColor()
+            {
+                var parameters = new NavigationParameters();
+                parameters.Add("color", this);
+
+                //await _navigationService.NavigateAsync("PantoneColorDetalle");            
+                await _navigationService.NavigateAsync("PantoneColorDetalle", parameters);            
+            }
+        }
+
+        ------------------------------------------------
+        Actualizo la vista del listado para pasar el _navigationService, solo le agrego esta linea en el constructor de PantoneColorViewModel
+
+
+        ListaColores = new List<PantoneColorViewModel>(
+                    response.Result.data.Select(x=> new PantoneColorViewModel(_navigationService) {
+                        color = x.color,
+                        id = x.id,
+                        Image = x.Image,
+                        name = x.name
+                    })
+                    ).ToList();
+    
+        ------------------------------------------------
+        En la vista agrego el GestureRecognizers al grid donde muestro mi informacion
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding SelectColorCommand}" NumberOfTapsRequired="1" />
+        </Grid.GestureRecognizers>
+
+        queda asi:
+
+        <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>                                        
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectColorCommand}" NumberOfTapsRequired="1" />
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90" />
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding Image}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ></Image>
+                            <Label Text="{Binding name}" Grid.Row="0" Grid.Column="1" ></Label>
+                            <Label Text="{Binding color}" Grid.Row="1" Grid.Column="1"></Label>
+                        </Grid>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        ------------------------------------------------
+        en el viewmodel que recibe lo tengo que actualizar para recibir parametros, en este caso la variable donde guardo la informacion es en ColorPantone, y en la vista uso esa variable
+
+
+
+        public class PantoneColorDetalleViewModel : ViewModelBase
+        {
+            private PantoneColor _colorPantone;
+
+            public PantoneColor ColorPantone
+            {
+                get => _colorPantone;
+                set => SetProperty(ref _colorPantone, value);
+            }
+
+            public PantoneColorDetalleViewModel(INavigationService navigationService):base(navigationService)
+            {
+
+            }
+
+            public override void OnNavigatedTo(INavigationParameters parameters)
+            {
+                base.OnNavigatedTo(parameters);
+
+                if (parameters.ContainsKey("color"))
+                {
+                    ColorPantone = parameters.GetValue<PantoneColor>("color");
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+
+ */
+#endregion
+
 
 
 #region Plantilla-region-MiTitulo-comentario
