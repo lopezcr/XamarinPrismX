@@ -3,7 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="XamarinPrismX.Views.ListadoColorPage">
+             x:Class="XamarinPrismX.Views.ListadoColorPage"
+             xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms">
 
-    <Label Text="listado"> </Label>
+
+    <StackLayout BackgroundColor="White">
+        <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Margin="15,15,0,15" Padding="0" Grid.Row="0">
+                <shimmer:SfShimmer x:Name="shimmerRecientes"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  
+                                   IsActive="{Binding IsRunning}" Type="Video">
+                    <shimmer:SfShimmer.CustomView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="110"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <border:SfBorder Grid.Row="0" Grid.Column="0"
+                         BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                         BorderColor="Transparent"
+                         HeightRequest="110" WidthRequest="110"
+                         VerticalOptions="Center" />
+
+                            <StackLayout Grid.Row="0" Grid.Column="1" Padding="0,0,15,0">
+                                <border:SfBorder 
+                                     BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                                     BorderColor="Transparent"
+                                     HeightRequest="30" />
+                                <border:SfBorder 
+                                     BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                                     BorderColor="Transparent"
+                                     HeightRequest="30" />
+                            </StackLayout>
+                        </Grid>
+                    </shimmer:SfShimmer.CustomView>
+                        <shimmer:SfShimmer.Content>
+                           <StackLayout>
+                                    <Label Text="(Aqui meto lo q quiera) Content is loaded! " HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                        </shimmer:SfShimmer.Content>
+                </shimmer:SfShimmer>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+
 </ContentPage>

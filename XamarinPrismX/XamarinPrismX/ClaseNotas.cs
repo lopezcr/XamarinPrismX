@@ -730,6 +730,99 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Mostrar lista de recuperada con WebService (Shimmer)
+/*     
+      para el shimmer se utilizan dos propiedades IsRunning y IsVisible, isRunning es para cuando el shimmer esta activo e isVisble para cuando ya termino de cargar el WS y ver la informacion.
+      Osea es lo mismo que cuando el ajax y un gif de load, solo que el shimmer es mas nice, osea hace como un load pero con la forma que se supone que se mostrara la informacion cuando cargue
+      (de IsVisible creo que no se  usa en el shimmer, pero lo dejo por si acaso)
+
+        private bool _isRunning;
+
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set => SetProperty(ref _isRunning, value);
+        }
+               
+       
+    Estas propiedades se cambian valor antes y despues del WS, o en su caso en el catch al buscar la informacion con el WS
+
+
+    --------------------------------------------------------------------
+    Realmente el shimmer es bien sencillo , tan simple como esto, un shimmer con su contentView (que es como un previo) y el content donde va lo que queremos mostrar.
+
+            <shimmer:SfShimmer x:Name="shimmerRecientes"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  
+                                   IsActive="{Binding IsRunning}" Type="Video">
+                    <shimmer:SfShimmer.CustomView>
+                        <Label Text="Cargando..."></Label>                        
+                    </shimmer:SfShimmer.CustomView>
+                        <shimmer:SfShimmer.Content>
+                           <StackLayout>
+                                    <Label Text="(Aqui meto lo q quiera) Content is loaded! " HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                        </shimmer:SfShimmer.Content>
+                </shimmer:SfShimmer>
+
+    --------------------------------------------------------------------
+    El chiste entonces del shimmer es simular una previa parecido a lo que se va a mostrar entonces la etiqueta importante es el border:SfBorder que el que hace el efecto de cargando
+    Abajo un ejemplo mas completo, en realidad sobre shimmer y border:SfBorder es poco, lo que le da la forma es el grid 
+    el shimmer tambien ya tiene previos por default, pero no lo puse por que es mejor el personalizado, para los de default ver documentacion shimmer en la pagina de synfusion
+
+    Hay que agregar esto en el contentPage del xaml:
+    xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+       
+
+        <StackLayout BackgroundColor="White">
+        <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Margin="15,15,0,15" Padding="0" Grid.Row="0">
+                <shimmer:SfShimmer x:Name="shimmerRecientes"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  
+                                   IsActive="{Binding IsRunning}" Type="Video">
+                    <shimmer:SfShimmer.CustomView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="110"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <border:SfBorder Grid.Row="0" Grid.Column="0"
+                         BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                         BorderColor="Transparent"
+                         HeightRequest="110" WidthRequest="110"
+                         VerticalOptions="Center" />
+
+                            <StackLayout Grid.Row="0" Grid.Column="1" Padding="0,0,15,0">
+                                <border:SfBorder 
+                                     BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                                     BorderColor="Transparent"
+                                     HeightRequest="30" />
+                                <border:SfBorder 
+                                     BackgroundColor="{Binding Color,Source={x:Reference shimmerRecientes}}"
+                                     BorderColor="Transparent"
+                                     HeightRequest="30" />
+                            </StackLayout>
+                        </Grid>
+                    </shimmer:SfShimmer.CustomView>
+                        <shimmer:SfShimmer.Content>
+                           <StackLayout>
+                                    <Label Text="(Aqui meto lo q quiera) Content is loaded! " HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                        </shimmer:SfShimmer.Content>
+                </shimmer:SfShimmer>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+
+      
+ */
+#endregion
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
