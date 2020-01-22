@@ -10,6 +10,7 @@
         <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
         <Button Text="Listado Colores" Command="{Binding ListadoColoresCommand}"/>
         <Button Text="Carousel simple" Command="{prism:NavigateTo CarouselSimple}" />
+        <Button Text="Carousel Difente Template" Command="{prism:NavigateTo CarouselDiferenteTemplate}" />
 
         
         <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >

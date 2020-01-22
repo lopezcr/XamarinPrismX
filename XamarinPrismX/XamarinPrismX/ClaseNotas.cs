@@ -1089,6 +1089,20 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Carousel con diferentes ItemTemplate (Preparacion)
+/*     
+  Hare otra vista para este ejemplo     
+  El chiste de este ejemplo es que a veces una lista de de una clase puede tener 
+  mas de un diseño. Ejemplo encuesta. En una misma lista habia una pregunta/encuesta y con cierto parametro uno 
+  utilizaba un diseño u otro.
+  Osea en una vista de carousel tenia un diseño y cambiaba al otro item y podia tener otro diseño
+
+  -Creare otro vista  (ContentPage) y utilizare el mismo Ws realizado anteriormente
+
+      
+ */
+#endregion
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
