@@ -1233,6 +1233,151 @@ En la vista los template tiene un nombre
 #endregion
 
 
+#region Menu en MasterDetail (ListView)
+/*     
+    En el ejemplo anterior se creo la masterDetailPage para el menu hamburguesa pero el menu solo quedon la informacion que trae al crear la masterDetailPage
+    Ahora crear un menu con un listView
+    Para este ejemplo solo me sirve del menu el item de ViewB
+
+    En la carpeta model Creo la clase Menu
+
+
+    public class Menu
+    {
+        public string Icon { get; set; }
+        public string Title { get; set; }
+        public string PageName { get; set; }        
+        public int Index { get; set; }
+    }
+    ----------------------------------------------------
+    Creo un viewmodel
+
+        public class MenuItemViewModel : Menu
+    {
+
+        private readonly INavigationService _navigationService;
+        private DelegateCommand _selectMenuCommand;
+
+        public MenuItemViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        public DelegateCommand SelectMenuCommand => _selectMenuCommand ?? (_selectMenuCommand = new DelegateCommand(SelectMenu));
+
+        private async void SelectMenu()
+        {
+            //Aqui hay que corregir algo para navegar mejor y regresar, pero hay va :)
+            await _navigationService.NavigateAsync($"NavigationPage/{PageName}");
+        }
+    }
+
+    ----------------------------------------------------
+    //en el viewmodel del masterDetailPage actualizo
+
+        public class MyMasterDetailPage1ViewModel : ViewModelBase
+    {
+        private readonly INavigationService _navigationService;
+        public ObservableCollection<MenuItemViewModel> Menus { get; set; }
+        public MyMasterDetailPage1ViewModel(INavigationService navigationService):base(navigationService)
+        {
+            _navigationService = navigationService;
+            LoadMenus();
+
+        }
+
+
+        private void LoadMenus()
+        {
+            var menus = new List<Menu>
+            {
+                new Menu
+                {
+                    Icon = "menu.png",
+                    PageName = "MainPage",
+                    Title = "Menú",
+                    Index = 0
+                },
+                new Menu
+                {
+                    Icon = "encuesta.png",
+                    PageName = "MainPage",
+                    Title = "Encuesta",
+                    Index = 1
+                },
+                new Menu
+                {
+                    Icon = "eventos.png",
+                    PageName = "MainPage",
+                    Title = "Eventos",
+                    Index = 2
+                },
+                new Menu
+                {
+                    Icon = "noticias.png",
+                    PageName = "NoticiasPage",
+                    Title = "Noticias",
+                    Index = 3
+                },
+                new Menu
+                {
+                    Icon = "noticias.png",
+                    PageName = "ViewB",
+                    Title = "View B",
+                    Index = 3
+                }
+            };
+
+            Menus = new ObservableCollection<MenuItemViewModel>(
+                menus.Select(m => new MenuItemViewModel(_navigationService)
+                {
+                    Icon = m.Icon,
+                    PageName = m.PageName,
+                    Title = m.Title,
+                    Index = m.Index
+                }).ToList());
+        }
+
+
+    }
+
+    ----------------------------------------------------
+    Y en la vista donde esta el masterdetailpage , agrego el listview
+
+    <ListView BackgroundColor="White" ItemsSource="{Binding Menus}" SeparatorVisibility="Default" RowHeight="50" VerticalOptions="StartAndExpand" >
+                        <ListView.ItemTemplate >
+                            <DataTemplate>
+                                <ViewCell >
+                                    <Grid VerticalOptions="Center">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}"   />
+                                        </Grid.GestureRecognizers>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Source="{Binding Icon}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" />
+                                        <Label Grid.Column="1"   TextColor="Black" FontSize="14" VerticalOptions="Center" Text="{Binding Title}" Padding="15,0,0,0" />
+                                        <Image Source="arrowmenu.png" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+
+
+
+ */
+#endregion
+
+
 #region Plantilla-region-MiTitulo-comentario
 /*     
       

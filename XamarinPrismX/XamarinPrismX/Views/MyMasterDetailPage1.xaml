@@ -8,8 +8,45 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
-                <!-- TODO: // Update the Layout and add some real menu items  -->
-                <Button Text="ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
+
+
+                
+                    <ListView BackgroundColor="White" ItemsSource="{Binding Menus}" SeparatorVisibility="Default" RowHeight="50" VerticalOptions="StartAndExpand" >
+                        <ListView.ItemTemplate >
+                            <DataTemplate>
+                                <ViewCell >
+                                    <Grid VerticalOptions="Center">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}"   />
+                                        </Grid.GestureRecognizers>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Source="{Binding Icon}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" />
+                                        <Label Grid.Column="1"   TextColor="Black" FontSize="14" VerticalOptions="Center" Text="{Binding Title}" Padding="15,0,0,0" />
+                                        <Image Source="arrowmenu.png" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout VerticalOptions="FillAndExpand" >
+                        <Image Source="logocoralmenu.png" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
+                        <Label Text="Cerrar Sesión"  TextDecorations="Underline" TextColor="#F70041" FontSize="14" HorizontalOptions="Center" VerticalOptions="End">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                 
+
+
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
