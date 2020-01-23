@@ -1103,6 +1103,113 @@ Ver documentacion en synfusion SfTextInputLayout
  */
 #endregion
 
+#region Carousel con diferentes ItemTemplate
+/*     
+ Como explique anteriormente lo que se busca es tener diferentes template para una misma lista, y escoger el template de acuerdo a algun valor del item actual de la lista.
+
+-------------------------------------------
+ para este ejemplo se modifico el PantoneColorViewModel (es del tipo que se itera en mi Carousel) agregando una propiedad mas:
+ 
+    //simplemente me dice si el id del mi elemento (PantoneColorViewModel) es par o no, esta logica puede variar de acuerdo a la necesidad que se quiera escoger el template.
+
+    public class PantoneColorViewModel : PantoneColor
+    { 
+        ... /logica anterior
+
+        public bool itemParSelectorTemplate {
+            get {
+                return (id % 2)==0 ? true : false;
+            } 
+     }
+
+
+-------------------------------------------
+Agregamos una nueva clase que nos va a ayudar a escoger el template
+En mi caso lo cree en la carpeta Control
+Como se puede observar mas abajo utilizamos la propiedad que creamos anteriormente (itemParSelectorTemplate)
+Esta propiedad la creamos para ayudarnos a seleccionar el template, pero la logica de esta propiedadad tambien la pudimos haber evitado  y hacer la operacion en esta misma clase
+pero la deje aqui para dejar ver como se hace con una propiedad del viewmodel
+
+!!importante, aqui se devuelve Template1 o Template2, por eso se utlizo un operador ternario, pero en caso de que haya mas opciones se puede usar un select-case o varios if
+
+
+using Xamarin.Forms;
+using XamarinPrismX.ViewModels;
+
+namespace XamarinPrismX.Control
+{
+    class ColorSelectTemplate : DataTemplateSelector
+    {
+        public DataTemplate Template1 { get; set; } //En mi ejemplo de encuesta, este era preguntaAbierta
+        public DataTemplate Template2 { get; set; }//En mi ejemplo de encuenta, este era preguntaCerrada
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((PantoneColorViewModel)item).itemParSelectorTemplate == true ? Template1 : Template2;
+        }
+    }
+}
+
+
+
+
+--------------------------------------------
+En la vista los template tiene un nombre
+   
+    //--------------
+
+    <?xml version="1.0" encoding="utf-8" ?>
+    xmlns:controls="clr-namespace:XamarinPrismX.Control"
+    >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="TemplateOpcion1">
+                <StackLayout>
+                    <Label Text="Nombre:"></Label>
+                    <Label Text="{Binding name}"></Label>
+                </StackLayout>                
+            </DataTemplate>
+            <DataTemplate x:Key="TemplateOpcion2">
+                <StackLayout>                    
+                    <Label Text="{Binding name}"></Label>
+                    <Image Source="{Binding Image}"></Image>
+                </StackLayout>                
+            </DataTemplate>
+
+            <controls:ColorSelectTemplate x:Key="colorSelectTemplate"
+                Template1="{StaticResource TemplateOpcion1}"
+                Template2="{StaticResource TemplateOpcion2}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+
+    <ScrollView>
+        <StackLayout>
+            <CarouselView x:Name="CarouselEncuesta" ItemsSource="{Binding ListaColores}" EmptyView="No hay encuestas disponibles"  ItemTemplate="{StaticResource colorSelectTemplate}"  IsSwipeEnabled="True">
+            </CarouselView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+
+    -----------------------------
+     xmlns:controls="clr-namespace:XamarinPrismX.Control"  // Referencia a la clase que utilizo para escoger el template
+
+    <DataTemplate x:Key="TemplateOpcion1"> //nombre del template y dentro va el diseño que queramos
+
+    <controls:ColorSelectTemplate x:Key="colorSelectTemplate"
+                Template1="{StaticResource TemplateOpcion1}"
+                Template2="{StaticResource TemplateOpcion2}" />
+    //key nombre que va el carousel/ItemTemplate
+    Template1 //es la propiedad que se creo en ColorSelectTemplate ...public DataTemplate Template1
+    {StaticResource TemplateOpcion1}  //es el template que se utilizara en caso de que template1 es igual a true segun ColorSelectTemplate
+
+    //en el carousel solo agrego el key del control
+    ItemTemplate="{StaticResource colorSelectTemplate}"
+ 
+    
+ */
+#endregion
 
 #region Plantilla-region-MiTitulo-comentario
 /*     

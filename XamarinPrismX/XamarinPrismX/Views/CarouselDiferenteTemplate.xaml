@@ -3,8 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="XamarinPrismX.Views.CarouselDiferenteTemplate">
+             x:Class="XamarinPrismX.Views.CarouselDiferenteTemplate"
+             xmlns:controls="clr-namespace:XamarinPrismX.Control"
+             >
 
-    <Label Text="Aqui va mi carousel"></Label>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="TemplateOpcion1">
+                <StackLayout>
+                    <Label Text="Nombre:"></Label>
+                    <Label Text="{Binding name}"></Label>
+                </StackLayout>                
+            </DataTemplate>
+            <DataTemplate x:Key="TemplateOpcion2">
+                <StackLayout>                    
+                    <Label Text="{Binding name}"></Label>
+                    <Image Source="{Binding Image}"></Image>
+                </StackLayout>                
+            </DataTemplate>
+
+            <controls:ColorSelectTemplate x:Key="colorSelectTemplate"
+                Template1="{StaticResource TemplateOpcion1}"
+                Template2="{StaticResource TemplateOpcion2}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+
+    <ScrollView>
+        <StackLayout>
+            <CarouselView x:Name="CarouselEncuesta" ItemsSource="{Binding ListaColores}" EmptyView="No hay encuestas disponibles"  ItemTemplate="{StaticResource colorSelectTemplate}"  IsSwipeEnabled="True">
+            </CarouselView>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>

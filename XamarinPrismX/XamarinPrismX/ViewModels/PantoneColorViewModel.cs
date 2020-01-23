@@ -26,5 +26,11 @@ namespace XamarinPrismX.ViewModels
             //await _navigationService.NavigateAsync("PantoneColorDetalle");            
             await _navigationService.NavigateAsync("PantoneColorDetalle", parameters);            
         }
+
+        public bool itemParSelectorTemplate {
+            get {
+                return (id % 2)==0 ? true : false;
+            } 
+        }
     }
 }
