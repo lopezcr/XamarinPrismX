@@ -1410,6 +1410,53 @@ En la vista los template tiene un nombre
 #endregion
 
 
+#region Obtener el viewModel desde codeBehind
+/*     
+    //En el codebehind creamos una clase del tipo MyPageViewModel e instanciamos desde el constructor
+
+     public OpinionPageViewModel OPVM;
+
+    public OpinionPage() //Este es el constructor
+        {
+            OPVM = ((OpinionPageViewModel)this.BindingContext);
+            InitializeComponent();
+            
+        }
+
+    Esto lo utilice en el ejemplo de encuestas donde  en el xaml dentro de un carousel existia un boton siguiente
+    y desde el codebehind avanzaba al sigueinte item del carousel. El problema es que si llegamos al ultimo item del carouse y le damos siguiente marca error.
+    Entonces como ya tenia una instancia del viewmodel pude acceder a la varible que tenia el source del carousel y pude validar con el count de mi variable
+
+
+    Ejemplo del codebehind de siguiente y validando
+
+    private void next_Clicked(object sender, System.EventArgs e)
+        {
+
+            int itemcount = OPVM.Encuestas.Detalle.Count;
+            var encuestaActual = OPVM.Encuestas.Detalle[CarouselEncuesta.Position];            
+            if (! string.IsNullOrEmpty(encuestaActual.TextoRespuesta))
+            {
+                if (CarouselEncuesta.Position + 1 != itemcount)
+                {
+                    CarouselEncuesta.Position = CarouselEncuesta.Position + 1;
+                }
+                else
+                {
+                    //Oculto y desoculto
+                    FinalEncuesta();
+                }
+            }
+        }
+
+
+
+
+
+ */
+#endregion
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
