@@ -1377,6 +1377,39 @@ En la vista los template tiene un nombre
  */
 #endregion
 
+#region Singleton de un ViewModel
+/*     
+    Es un poco diferente de Singleton Normal, ya que estas clases las crea en automatico el xamarin  
+    Para este ejemplo no realice un ejemplo real ya que no se me ocurrio nada simple para poder usar el singleton :P 
+    Ahi esta el ejemplo :P
+
+
+    public class MasterDetailShellPageViewModel : ViewModelBase
+    {
+        private static MasterDetailShellPageViewModel _instance;
+ 
+        public MasterDetailShellPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IDialogService dialogService) : base(navigationService, eventAggregator)
+        {
+            _instance = this;
+            
+        }
+
+        public static MasterDetailShellPageViewModel GetInstance()
+        {
+            return _instance;
+        }
+    }
+    -------------------------------------------------------------------------
+
+    //En otro viewmodel podemos usar la instancia de la clase con el singleton
+    var mainpage = MainPageViewModel.GetInstance();
+    mainpage.UnMetodoCualquiera();
+
+
+ */
+#endregion
+
+
 
 #region Plantilla-region-MiTitulo-comentario
 /*     
