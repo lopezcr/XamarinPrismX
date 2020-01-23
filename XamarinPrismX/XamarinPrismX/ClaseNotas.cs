@@ -1211,8 +1211,31 @@ En la vista los template tiene un nombre
  */
 #endregion
 
+
+#region MasteDetail menu (simple)
+/*     
+    para crear el menu hamburguesa, simplemente hay que crear un MasterDetailPage y navegar hacia la otra pagina
+
+    osea para este ejemplo cree MyMasterDetailPage1 y un contentPage de siempre
+
+    Desde la pagina a navegar Cree un boton para navegar hacia el contentPAge atravez de mi masterDetail
+
+    Ejemplo al navegar del metodo a navegar:
+
+     async void MasterDetailExecute()
+        {
+            await NavigationService.NavigateAsync($"MyMasterDetailPage1/NavigationPage/ContentPageVMD");
+        }
+
+    Y eso es todo para tener el menu hamburugesa :)
+      
+ */
+#endregion
+
+
 #region Plantilla-region-MiTitulo-comentario
 /*     
+      
  */
 #endregion
 

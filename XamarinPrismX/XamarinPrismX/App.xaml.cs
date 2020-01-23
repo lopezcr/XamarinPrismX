@@ -51,6 +51,8 @@ namespace XamarinPrismX
             containerRegistry.RegisterForNavigation<PantoneColorDetalle, PantoneColorDetalleViewModel>();
             containerRegistry.RegisterForNavigation<CarouselSimple, CarouselSimpleViewModel>();
             containerRegistry.RegisterForNavigation<CarouselDiferenteTemplate, CarouselDiferenteTemplateViewModel>();
+            containerRegistry.RegisterForNavigation<MyMasterDetailPage1, MyMasterDetailPage1ViewModel>();
+            containerRegistry.RegisterForNavigation<ContentPageVMD, ContentPageVMDViewModel>();
         }
     }
 }

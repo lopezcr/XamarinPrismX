@@ -11,6 +11,7 @@
         <Button Text="Listado Colores" Command="{Binding ListadoColoresCommand}"/>
         <Button Text="Carousel simple" Command="{prism:NavigateTo CarouselSimple}" />
         <Button Text="Carousel Difente Template" Command="{prism:NavigateTo CarouselDiferenteTemplate}" />
+        <Button Text="MasterDetail ContentPage Menu " Command="{Binding MasterDetailContentPAgeCommand}" />
 
         
         <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >
