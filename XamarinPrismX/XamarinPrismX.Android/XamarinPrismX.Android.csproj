@@ -56,10 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Syncfusion.Licensing">
-      <Version>17.4.0.44</Version>
+      <Version>17.4.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>17.4.0.44</Version>
+      <Version>17.4.0.49</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
