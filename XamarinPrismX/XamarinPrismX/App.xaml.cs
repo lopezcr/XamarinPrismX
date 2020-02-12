@@ -31,10 +31,11 @@ namespace XamarinPrismX
             }
             else
             {
-                await NavigationService.NavigateAsync("/Login");
+                //await NavigationService.NavigateAsync("/Login");
             }
 
             //await NavigationService.NavigateAsync("NavigationPage/Login");
+            await NavigationService.NavigateAsync("NavigationPage/CollectionViewGrouping");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -53,6 +54,8 @@ namespace XamarinPrismX
             containerRegistry.RegisterForNavigation<CarouselDiferenteTemplate, CarouselDiferenteTemplateViewModel>();
             containerRegistry.RegisterForNavigation<MyMasterDetailPage1, MyMasterDetailPage1ViewModel>();
             containerRegistry.RegisterForNavigation<ContentPageVMD, ContentPageVMDViewModel>();
+            containerRegistry.RegisterForNavigation<ListCollapse, ListCollapseViewModel>();
+            containerRegistry.RegisterForNavigation<CollectionViewGrouping, CollectionViewGroupingViewModel>();
         }
     }
 }

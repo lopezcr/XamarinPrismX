@@ -10,8 +10,10 @@
         <Button Text="Navigate to main" Command="{Binding NavigateCommand}"/>
         <Button Text="Listado Colores" Command="{Binding ListadoColoresCommand}"/>
         <Button Text="Carousel simple" Command="{prism:NavigateTo CarouselSimple}" />
-        <Button Text="Carousel Difente Template" Command="{prism:NavigateTo CarouselDiferenteTemplate}" />
+        <Button Text="Carousel Difente Template" Command="{prism:NavigateTo CarouselDiferenteTemplate}" />        
         <Button Text="MasterDetail ContentPage Menu " Command="{Binding MasterDetailContentPAgeCommand}" />
+        <Button Text="List y colapso" Command="{prism:NavigateTo ListCollapse}" />
+        <Button Text="Collectionview gruoping" Command="{prism:NavigateTo CollectionViewGrouping}" />
 
         
         <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >

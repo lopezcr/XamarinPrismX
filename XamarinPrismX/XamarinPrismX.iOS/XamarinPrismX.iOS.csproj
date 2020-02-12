@@ -189,10 +189,16 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ExpandableView">
+      <Version>1.0.10</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Licensing">
       <Version>17.4.0.49</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
+      <Version>17.4.0.49</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Expander">
       <Version>17.4.0.49</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
