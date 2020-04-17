@@ -14,6 +14,7 @@
         <Button Text="MasterDetail ContentPage Menu " Command="{Binding MasterDetailContentPAgeCommand}" />
         <Button Text="List y colapso" Command="{prism:NavigateTo ListCollapse}" />
         <Button Text="Collectionview gruoping" Command="{prism:NavigateTo CollectionViewGrouping}" />
+        <Button Text="Expanding" Command="{prism:NavigateTo Expanding}" />
 
         
         <Label Text="Cerrar sesion" HorizontalOptions="Center"  TextDecorations="Underline" TextColor="Black" >
